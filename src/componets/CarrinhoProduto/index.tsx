@@ -13,9 +13,20 @@ interface ListaProduto {
   preco: string;
 } 
 
+interface ListaUsuario {
+  id: string;
+  nome: string;
+  cpf: string;
+  cidade: string;
+  email: string;
+  // senha: string
+} 
+
 export function CarrinhoProduto() {
   const [listaAtualizada, setListaAtualizada] = useState<ListaProduto[]>([]);
   const [listaTemporaria, setListaTemporaria] = useState<ListaProduto[]>([]);
+
+  const [usuario, setUsuario] = useState<ListaUsuario[]>([]);
   // const [teste, setTeste] = useState('');
 
   const history = useHistory();
@@ -114,17 +125,32 @@ export function CarrinhoProduto() {
     }
   }
 
-  function addCarrinho() {
+  function finalizaCompra() {
+    const listaLocalStorage = JSON.parse(
+      localStorage.getItem('CadastroUsuario') || '[]',
+    );
+
+    // atualiza setListaTemporaria com o que tem no localStorage
+    setUsuario(listaLocalStorage);
+    console.log('usuarioooo', listaLocalStorage);
+
+    console.log('Usuario', usuario);
+
     const todosProdutos = {
-      ...listaAtualizada,
-      qtdeTotal,
-      precoTotal,
+      produtos: {
+        ...listaAtualizada,
+      },
+      listaLocalStorage,
+      total: {
+        qtdeTotal,
+        precoTotal,
+      }
     }
 
     localStorage.setItem('listaCarrinho', JSON.stringify(todosProdutos));
     console.log(todosProdutos)
 
-    // history.push('/login');
+    history.push('/compra-finalizada');
   }
 
   return (
@@ -193,7 +219,7 @@ export function CarrinhoProduto() {
           <p>R$: {precoTotal.toFixed(2)}</p>
         </div>
 
-        <button type="button" onClick={addCarrinho}>Finaizar Compra</button>
+        <button type="button" onClick={finalizaCompra}>Finaizar Compra</button>
 
         <Link to="/">Adicionar + produtos</Link>
         
