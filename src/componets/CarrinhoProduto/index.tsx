@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiTrash2 } from 'react-icons/fi';
 
 import { Container, Content, Resumo } from './styles';
@@ -15,6 +15,8 @@ interface ListaProduto {
 export function CarrinhoProduto() {
   const [listaAtualizada, setListaAtualizada] = useState<ListaProduto[]>([]);
   // const [teste, setTeste] = useState('');
+
+  const history = useHistory();
 
   var qtdeTotal = 0;
   var precoTotal = 0.0;
@@ -33,18 +35,6 @@ export function CarrinhoProduto() {
     // atualiza listaAtualizada com o que tem no localStorage
     setListaAtualizada(listaLocalStorage);
   }
-
-  // function mostrarResumo() {
-  //   {listaAtualizada.forEach((produto) => {
-  //     const qtdeTotal = parseInt(produto.qtde);
-
-  //     const total = qtde + qtdeTotal
-  //     setQtde(total)
-  //     console.log('Total', total);
-  //   })}
-
-  //   console.log(qtde);
-  // }
 
   function deleteProduto(index: number) {
     listaAtualizada.splice(index, 1);
@@ -95,6 +85,19 @@ export function CarrinhoProduto() {
 
       carregarLista();
     }
+  }
+
+  function addCarrinho() {
+    const todosProdutos = {
+      ...listaAtualizada,
+      qtdeTotal,
+      precoTotal,
+    }
+
+    localStorage.setItem('listaCarrinho', JSON.stringify(todosProdutos));
+    console.log(todosProdutos)
+
+    // history.push('/login');
   }
 
   return (
@@ -163,7 +166,7 @@ export function CarrinhoProduto() {
           <p>R$: {precoTotal.toFixed(2)}</p>
         </div>
 
-        <button>Finaizar Compra</button>
+        <button type="button" onClick={addCarrinho}>Finaizar Compra</button>
 
         <Link to="/">Adicionar + produtos</Link>
         

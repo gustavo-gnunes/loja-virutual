@@ -50,7 +50,8 @@ export function Produto() {
       localStorage.setItem('listaProduto', JSON.stringify(lista));
       setListaAtualizada(lista);
 
-      history.push('/carrinho');
+      // history.push('/carrinho');
+      history.push('/simple-login');
     } else {
       alert('Entre com a quantidade!');
     }
