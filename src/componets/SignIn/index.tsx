@@ -1,5 +1,6 @@
 import React, { useState, useEffect, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import nookies from 'nookies';
 
 import { Container } from './styles';
 
@@ -16,7 +17,9 @@ export function SignIn() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  const [listaAtualizada, setListaAtualizada] = useState<ListaUsuario[]>([]);
+  const [todosUsuarios, setTodosUsuarios] = useState<ListaUsuario[]>([]);
+
+  const history = useHistory();
 
   // carrega lista que está no localStorage, qdo atualiza a página
   useEffect(() => {
@@ -29,8 +32,8 @@ export function SignIn() {
       localStorage.getItem('CadastroUsuario') || '[]',
     );
 
-    // atualiza listaAtualizada com o que tem no localStorage
-    setListaAtualizada(listaLocalStorage);
+    // atualiza setTodosUsuarios com o que tem no localStorage
+    setTodosUsuarios(listaLocalStorage);
   }
 
   
@@ -38,8 +41,31 @@ export function SignIn() {
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
-    if (listaAtualizada.length !== 0) {
-      console.log('tem usuario cadastrado')
+    if (
+      email.trim() === '' ||
+      senha.trim() === ''
+    ) {
+      alert('Digite todos os campos obrigatórios!');
+      return;
+    }
+
+    if (setTodosUsuarios.length !== 0) {
+      const achou = todosUsuarios.find(usuario => usuario.email === email)
+
+      if (achou?.email === email && achou?.senha === senha) {
+        const user = email;
+
+        nookies.set(null, 'User', user, {
+          path: '/',
+          maxAge: 86400
+        })
+
+        history.push('/carrinho');
+      } else {
+        alert('Email ou senha incorreto!');
+      }
+
+      
     } else (
       alert('Usuário não tem cadastro!')
     )
@@ -50,8 +76,18 @@ export function SignIn() {
       <form onSubmit={handleSubmit}>
         <h2>Faça o seu login</h2>
 
-        <input type="email" placeholder="Ex. nome@gmail.com" />
-        <input type="password" placeholder="Senha" />
+        <input 
+          type="email" 
+          placeholder="Ex. nome@gmail.com *" 
+          onChange={event => setEmail(event.target.value)}
+          value={email}
+        />
+        <input 
+          type="password" 
+          placeholder="Senha *" 
+          onChange={event => setSenha(event.target.value)}
+          value={senha}
+        />
 
         <button type="submit">Continuar</button>
         <Link to="/cadastro-usuario">Cadastre-se</Link>
