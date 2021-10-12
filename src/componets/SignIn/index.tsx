@@ -34,9 +34,7 @@ export function SignIn() {
 
     // atualiza setTodosUsuarios com o que tem no localStorage
     setTodosUsuarios(listaLocalStorage);
-  }
-
-  
+  }  
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -59,12 +57,11 @@ export function SignIn() {
           path: '/',
           maxAge: 86400
         })
-
+        
         history.push('/carrinho');
       } else {
         alert('Email ou senha incorreto!');
       }
-
       
     } else (
       alert('Usuário não tem cadastro!')

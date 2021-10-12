@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import nookies from 'nookies';
 
 import { Container, Content } from './styles';
 
@@ -19,6 +20,7 @@ interface ListaProduto {
 export function Produto() {
   const [quantidade, setQuantidade] = useState('');
   const [listaAtualizada, setListaAtualizada] = useState<ListaProduto[]>([]);
+  const [listaTemporaria, setListaTemporaria] = useState<ListaProduto[]>([]);
 
   const history = useHistory();
 
@@ -36,22 +38,45 @@ export function Produto() {
   // salvar produtos no local Storage
   function addProduto(produto: ListaProduto) {
     if (quantidade.length >= 1){
-      const listaProduto = {
-        id: produto.id,
-        imagemProduto: produto.imagemProduto,
-        descricao: produto.descricao,
-        qtde: quantidade,
-        preco: produto.preco,
-      };
-  
-      const lista = [...listaAtualizada, listaProduto];
-  
-      // atualiza a lista no localStorage
-      localStorage.setItem('listaProduto', JSON.stringify(lista));
-      setListaAtualizada(lista);
+      const cookies = nookies.get();
+      const user = cookies.User;
+
+      if ( user !== undefined) {
+        const listaProduto = {
+          id: produto.id,
+          imagemProduto: produto.imagemProduto,
+          descricao: produto.descricao,
+          qtde: quantidade,
+          preco: produto.preco,
+        };
+    
+        const lista = [...listaAtualizada, listaProduto];
+    
+        // atualiza a lista no localStorage
+        localStorage.setItem('listaProduto', JSON.stringify(lista));
+        setListaAtualizada(lista);
+
+        history.push('/carrinho');
+      } else {
+        // para salavar o que o usuário quer colocar no carrinho, qdo não estiver logado
+        const listaProduto = {
+          id: produto.id,
+          imagemProduto: produto.imagemProduto,
+          descricao: produto.descricao,
+          qtde: quantidade,
+          preco: produto.preco,
+        };
+    
+        const lista = [...listaTemporaria, listaProduto];
+    
+        // atualiza a lista no localStorage
+        localStorage.setItem('listaTemporaria', JSON.stringify(lista));
+        setListaTemporaria(lista);
+        history.push('/simple-login');
+      }    
 
       // history.push('/carrinho');
-      history.push('/simple-login');
+      // history.push('/simple-login');
     } else {
       alert('Entre com a quantidade!');
     }

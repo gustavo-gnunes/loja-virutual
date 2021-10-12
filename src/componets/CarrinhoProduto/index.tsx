@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiTrash2 } from 'react-icons/fi';
+import nookies from 'nookies';
 
 import { Container, Content, Resumo } from './styles';
 
@@ -14,6 +15,7 @@ interface ListaProduto {
 
 export function CarrinhoProduto() {
   const [listaAtualizada, setListaAtualizada] = useState<ListaProduto[]>([]);
+  const [listaTemporaria, setListaTemporaria] = useState<ListaProduto[]>([]);
   // const [teste, setTeste] = useState('');
 
   const history = useHistory();
@@ -23,17 +25,42 @@ export function CarrinhoProduto() {
 
   // carrega lista que está no localStorage, qdo atualiza a página
   useEffect(() => {
-    carregarLista();
+    const cookies = nookies.get();
+    const user = cookies.User;
+
+    if ( user !== undefined) {
+      carregarLista();
+    } else {
+      history.push('/simple-login');
+    }
   }, []);
 
   // carregar lista que está no localStorage
   function carregarLista() {
+    // lista temporaria
+    const listaTemporariaLocalStorage = JSON.parse(
+      localStorage.getItem('listaTemporaria') || '[]',
+    );
+
+    // atualiza setListaTemporaria com o que tem no localStorage
+    setListaTemporaria(listaTemporariaLocalStorage);
+    // -- fim listaTemporaria
+
+
     const listaLocalStorage = JSON.parse(
       localStorage.getItem('listaProduto') || '[]',
     );
 
+    const lista = [...listaLocalStorage, ...listaTemporariaLocalStorage];
+    // console.log(lista)
+
+    localStorage.setItem('listaProduto', JSON.stringify(lista));
     // atualiza listaAtualizada com o que tem no localStorage
-    setListaAtualizada(listaLocalStorage);
+    setListaAtualizada(lista);
+
+    localStorage.removeItem('listaTemporaria');
+    setListaTemporaria([]);
+    
   }
 
   function deleteProduto(index: number) {
