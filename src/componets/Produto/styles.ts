@@ -2,10 +2,34 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   margin: 1rem;
+  
+  .topo {
+    display: flex;
+    justify-content: space-between;
+  }
+
 
   h1 {
     margin-bottom: 1rem;
     text-align: center;
+  }
+
+  a {
+    text-decoration: none;
+    border-radius: 1rem;
+    font-size: 0.9rem;
+    background: var(--grey11);
+    color: var(--lightGrey);
+    padding: 0.7rem;
+    margin-top: 0.5rem;
+
+    opacity: 0.9;
+
+    transition: filter 0.2s;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 `;
 

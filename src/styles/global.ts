@@ -13,6 +13,7 @@ export default createGlobalStyle`
     --lightBlue: #6495ed;
     --grey11: #1c1c1c;
     --lightGrey: #d3d3d3;
+    --silver: #c0c0c0;
   }
 
   body {

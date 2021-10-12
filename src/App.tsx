@@ -1,15 +1,16 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
-import { Produto } from './componnets/Produto';
+import { Routes } from './routes';
 
 import GlobalStyle from './styles/global';
 
 function App() {
   return (
-    <>
-      <Produto />
+    <BrowserRouter>
+      <Routes />
       <GlobalStyle />
-    </>
+    </BrowserRouter>
   );
 }
 
