@@ -33,19 +33,19 @@ interface ListaPedido {
     cidade: string;
     email: string;
     senha: string;
-  };
+  },
   produto: {
     id: string;
     imagemProduto: string;
     descricao: string;
     qtde: string;
     preco: string;
-  };
+  },
   pedido: {
     id: string;
     totalQtde: string;
     totalPreco: string;
-  }
+  },
 }
 
 export function CompraFinalizada() {
@@ -72,17 +72,36 @@ export function CompraFinalizada() {
     setListaCarrinho(listaCarrinhoLocalStorage);
 
 
+      // const listaProdutoLocalStorage = JSON.parse(
+      //   localStorage.getItem('listaProduto') || '[]',
+      // );
+      // setListaProduto(listaProdutoLocalStorage);
+  
+      // const listaUsuarioLocalStorage = JSON.parse(
+      //   localStorage.getItem('CadastroUsuario') || '[]',
+      // );
+      // setListaUsuarios(listaUsuarioLocalStorage);
+  
+      // const lista = {
+      //   usuario: {...listaUsuarioLocalStorage}, 
+      //   produto: {...listaProdutoLocalStorage},
+      //   pedido: {...listaCarrinhoLocalStorage},
       
-    // const lista = {
-    //   produto:listaProdutoLocalStorage, 
-    //   usuario:listaUsuarioLocalStorage, 
-    //   pedido:listaCarrinhoLocalStorage
-    // }
-    // const listaAtualizada = [...pedido, lista]
-    //   // const lista = [listaProdutoLocalStorage, listaUsuarioLocalStorage, listaCarrinhoLocalStorage]
-
-    //   localStorage.setItem('PedidosFinalizados', JSON.stringify(listaAtualizada));
-    //   setPedido(listaAtualizada)
+      // }
+      // // console.log(lista)
+      // const listaAtualizada = [...pedido, lista];
+      // // const lista = [listaProdutoLocalStorage, listaUsuarioLocalStorage, listaCarrinhoLocalStorage]
+      // // console.log(listaAtualizada)
+      // localStorage.setItem('PedidosFinalizados', JSON.stringify(listaAtualizada));
+      // // setPedido(listaAtualizada)
+  
+      // const listaLocalStorage = JSON.parse(
+      //   localStorage.getItem('PedidosFinalizados') || '[]',
+      // );
+      // setPedido(listaLocalStorage);
+      // console.log(listaLocalStorage);
+      // console.log(pedido);
+      
   }, [])
 
   function mostrarPedido() {
@@ -95,6 +114,36 @@ export function CompraFinalizada() {
       localStorage.getItem('CadastroUsuario') || '[]',
     );
     setListaUsuarios(listaUsuarioLocalStorage);
+
+    const lista = {
+      usuario: {...listaUsuarioLocalStorage}, 
+      produto: {...listaProdutoLocalStorage},
+      pedido: [...listaCarrinho],
+    
+    }
+    // console.log(lista)
+    const listaAtualizada = [...pedido, lista];
+    // const lista = [listaProdutoLocalStorage, listaUsuarioLocalStorage, listaCarrinhoLocalStorage]
+    // console.log(listaAtualizada)
+    localStorage.setItem('PedidosFinalizados', JSON.stringify(listaAtualizada));
+    // setPedido(listaAtualizada)
+
+    const listaLocalStorage = JSON.parse(
+      localStorage.getItem('PedidosFinalizados') || '[]',
+    );
+    setPedido(listaLocalStorage);
+    console.log(listaLocalStorage);
+
+
+
+
+    // console.log('Pedido',pedido)
+
+    // const lista = {}
+    // const listaAtualizada = [...listaUsuarios];
+    // setListaUsuarios(listaAtualizada);
+
+    // console.log(listaAtualizada)
   }
 
   return (
@@ -174,6 +223,19 @@ export function CompraFinalizada() {
           </div>
         </ContentProduto>
       </Content>
+
+      {/* testando */}
+      <div>
+        {pedido.map((lista, index) => {
+          console.log('Lista', lista.usuario);
+          return (
+            <div key={index}>
+              <h3>Foi {lista.produto.descricao}</h3>
+            </div>
+            
+          )
+        })}
+      </div>
       
     </Container>
   )
