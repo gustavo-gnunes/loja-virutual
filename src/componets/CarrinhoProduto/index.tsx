@@ -160,8 +160,8 @@ export function CarrinhoProduto() {
       // totalPreco,
     ]
 
-    // localStorage.setItem('listaCarrinho', JSON.stringify(todosProdutos));
-    localStorage.setItem('listaCarrinho', JSON.stringify(lista));
+    localStorage.setItem('listaCarrinho', JSON.stringify(todosProdutos));
+    // localStorage.setItem('listaCarrinho', JSON.stringify(lista));
     console.log(todosProdutos)
 
     history.push('/compra-finalizada');
