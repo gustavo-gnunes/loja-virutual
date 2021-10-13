@@ -47,26 +47,6 @@ interface ListaPedido {
     totalPreco: string;
   }
 }
-// interface ListaPedido {
-//   id: string;
-//   listaLocalStorage: {
-//     id: string;
-//     nome: string;
-//     cpf: string;
-//     cidade: string;
-//   };
-//   produtos: {
-//     id: string;
-//     descricao: string;
-//     image: string;
-//     preco: string;
-//     qtde: string;
-//   };
-//   total: {
-//     qdteTotal: number;
-//     precoTotal: number;
-//   };
-// } 
 
 export function CompraFinalizada() {
   const [pedido, setPedido] = useState<ListaPedido[]>([]);

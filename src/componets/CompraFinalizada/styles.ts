@@ -41,8 +41,6 @@ export const Content = styled.div`
   margin-right: auto;
 
   display: flex;
-
-  /* background: red; */
 `;
 
 export const ContentUser = styled.div`
