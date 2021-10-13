@@ -46,7 +46,7 @@ export function Produto() {
         const achouProduto = listaAtualizada.find((lista, index) => lista.id === produto.id)
         // qdo já tem algum produto cadastrado, deve só alterar a qtde
         if (achouProduto) {
-          const produtoAtualizado = listaAtualizada.map((lista, index) => {
+          listaAtualizada.map((lista, index) => {
             if (lista.id === produto.id) {
               const qtdeAtualizada = parseInt(lista.qtde) + parseInt(quantidade);
               lista.qtde = qtdeAtualizada.toString();
