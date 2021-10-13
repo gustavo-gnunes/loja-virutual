@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiTrash2 } from 'react-icons/fi';
 import nookies from 'nookies';
+import {v4 as uuid} from 'uuid';
 
 import { Container, Content, Resumo } from './styles';
 
@@ -136,16 +137,28 @@ export function CarrinhoProduto() {
 
     console.log('Usuario', usuario);
 
-    const todosProdutos = {
-      produtos: {
-        ...listaAtualizada,
-      },
-      listaLocalStorage,
-      total: {
-        qtdeTotal,
-        precoTotal,
-      }
+    const totalQtde = qtdeTotal.toString();
+    const totalPreco = precoTotal.toString();
+
+    const lista = {
+      id: uuid(),
+      totalQtde,
+      totalPreco,
     }
+
+    const todosProdutos = [
+      lista,
+      // produtos: {
+      //   ...listaAtualizada,
+      // },
+      // listaLocalStorage,
+      // total: {
+      //   qtdeTotal,
+      //   precoTotal,
+      // }
+      // totalQtde,
+      // totalPreco,
+    ]
 
     localStorage.setItem('listaCarrinho', JSON.stringify(todosProdutos));
     console.log(todosProdutos)
