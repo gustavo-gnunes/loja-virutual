@@ -133,9 +133,6 @@ export function CarrinhoProduto() {
 
     // atualiza setListaTemporaria com o que tem no localStorage
     setUsuario(listaLocalStorage);
-    console.log('usuarioooo', listaLocalStorage);
-
-    console.log('Usuario', usuario);
 
     const totalQtde = qtdeTotal.toString();
     const totalPreco = precoTotal.toString();

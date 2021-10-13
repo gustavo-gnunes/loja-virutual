@@ -71,7 +71,9 @@ export function CompraFinalizada() {
     );
     setListaCarrinho(listaCarrinhoLocalStorage);
 
-    console.log(listaCarrinhoLocalStorage)
+    console.log(...listaCarrinhoLocalStorage)
+    const lista = {...listaCarrinhoLocalStorage}
+    console.log(lista)
 
   
 
@@ -160,7 +162,7 @@ export function CompraFinalizada() {
                 <div>
                   <p>{produto.id}</p>
                   <p>Quantidade de Produtos: {produto.totalQtde}</p>
-                  <p>Total R$: {produto.totalPreco}</p>
+                  <p>Total R$: {parseFloat(produto.totalPreco).toFixed(2)}</p>
                 </div>
                 
                 <button type="button" onClick={mostrarPedido}>Mostrar Pedido</button>
