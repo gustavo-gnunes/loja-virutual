@@ -69,8 +69,11 @@ export function CompraFinalizada() {
     const listaCarrinhoLocalStorage = JSON.parse(
       localStorage.getItem('listaCarrinho') || '[]',
     );
-    setListaCarrinho(listaCarrinhoLocalStorage);
+      setListaCarrinho(listaCarrinhoLocalStorage);
 
+    console.log(listaCarrinhoLocalStorage)
+
+  
 
       // const listaProdutoLocalStorage = JSON.parse(
       //   localStorage.getItem('listaProduto') || '[]',
@@ -118,7 +121,7 @@ export function CompraFinalizada() {
     const lista = {
       usuario: {...listaUsuarioLocalStorage}, 
       produto: {...listaProdutoLocalStorage},
-      pedido: [...listaCarrinho],
+      pedido: {...listaCarrinho},
     
     }
     // console.log(lista)
@@ -150,7 +153,7 @@ export function CompraFinalizada() {
     <Container>
       <h2>Pedido Concluído</h2>
       
-      <Resumo>
+      {/* <Resumo>
         {listaCarrinho.map((produto, index) => {
           return (
             <div key={index} className="resumo-container">
@@ -167,6 +170,25 @@ export function CompraFinalizada() {
             </div>            
           )
         })}       
+      </Resumo> */}
+
+      <Resumo>
+        {/* {listaCarrinho.map((produto, index) => {
+          return ( */}
+            <div className="resumo-container">
+              <h3>número do pedido</h3>
+              <div className="resumo-content">
+                <div>
+                  {/* <p>{listaCarrinho}</p> */}
+                  {/* <p>Quantidade de Produtos: {produto.totalQtde}</p>
+                  <p>Total R$: {produto.totalPreco}</p> */}
+                </div>
+                
+                <button type="button" onClick={mostrarPedido}>Mostrar Pedido</button>
+              </div>
+            </div>            
+          {/* )
+        })}        */}
       </Resumo>
 
       <Content>
