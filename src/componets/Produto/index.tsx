@@ -42,21 +42,60 @@ export function Produto() {
       const user = cookies.User;
 
       if ( user !== undefined) {
-        const listaProduto = {
-          id: produto.id,
-          imagemProduto: produto.imagemProduto,
-          descricao: produto.descricao,
-          qtde: quantidade,
-          preco: produto.preco,
-        };
-    
-        const lista = [...listaAtualizada, listaProduto];
-    
-        // atualiza a lista no localStorage
-        localStorage.setItem('listaProduto', JSON.stringify(lista));
-        setListaAtualizada(lista);
 
-        history.push('/carrinho');
+        const achouProduto = listaAtualizada.find((lista, index) => lista.id === produto.id)
+        // qdo já tem algum produto cadastrado, deve só alterar a qtde
+        if (achouProduto) {
+          const produtoAtualizado = listaAtualizada.map((lista, index) => {
+            if (lista.id === produto.id) {
+              const qtdeAtualizada = parseInt(lista.qtde) + parseInt(quantidade);
+              lista.qtde = qtdeAtualizada.toString();
+            }
+          })
+
+          const lista = [...listaAtualizada];
+    
+          // atualiza a lista no localStorage
+          localStorage.setItem('listaProduto', JSON.stringify(lista));
+          setListaAtualizada(lista);
+
+          history.push('/carrinho');
+        //   const qtdeAtualizada = parseInt(achouProduto?.qtde) + parseInt(quantidade);
+        //   console.log()
+        } else {
+          const listaProduto = {
+            id: produto.id,
+            imagemProduto: produto.imagemProduto,
+            descricao: produto.descricao,
+            qtde: quantidade,
+            preco: produto.preco,
+          };
+
+          const lista = [...listaAtualizada, listaProduto];
+    
+          // atualiza a lista no localStorage
+          localStorage.setItem('listaProduto', JSON.stringify(lista));
+          setListaAtualizada(lista);
+
+          history.push('/carrinho');
+        }
+
+
+        // const listaProduto = {
+        //   id: produto.id,
+        //   imagemProduto: produto.imagemProduto,
+        //   descricao: produto.descricao,
+        //   qtde: quantidade,
+        //   preco: produto.preco,
+        // };
+    
+        // const lista = [...listaAtualizada, listaProduto];
+    
+        // // atualiza a lista no localStorage
+        // localStorage.setItem('listaProduto', JSON.stringify(lista));
+        // setListaAtualizada(lista);
+
+        // history.push('/carrinho');
       } else {
         // para salavar o que o usuário quer colocar no carrinho, qdo não estiver logado
         const listaProduto = {
