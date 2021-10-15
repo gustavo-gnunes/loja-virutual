@@ -138,7 +138,7 @@ export function CarrinhoProduto() {
     const totalPreco = precoTotal.toString();
 
     const lista = {
-      id: uuid(),
+      idPedido: uuid(),
       totalQtde,
       totalPreco,
     }
@@ -159,7 +159,7 @@ export function CarrinhoProduto() {
 
     localStorage.setItem('listaCarrinho', JSON.stringify(todosProdutos));
     // localStorage.setItem('listaCarrinho', JSON.stringify(lista));
-    console.log(todosProdutos)
+    // console.log(todosProdutos)
 
     history.push('/compra-finalizada');
   }

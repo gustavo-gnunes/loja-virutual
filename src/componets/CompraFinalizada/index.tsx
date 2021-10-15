@@ -19,153 +19,111 @@ interface ListaUsuario {
   senha: string;
 } 
 
-interface ListaCarrinho {
+interface ListaPedidos {
   id: string;
-  totalQtde: string;
-  totalPreco: string;
-}
-
-interface ListaPedido {
-  usuario: {
-    id: string;
-    nome: string;
-    cpf: string;
-    cidade: string;
-    email: string;
-    senha: string;
-  },
+  nome: string;
+  cpf: string;
+  cidade: string;
+  email: string;
+  senha: string;
   produto: {
     id: string;
     imagemProduto: string;
     descricao: string;
     qtde: string;
     preco: string;
-  },
-  pedido: {
-    id: string;
-    totalQtde: string;
-    totalPreco: string;
-  },
+  };
+  idPedido: string;
+  totalQtde: string;
+  totalPreco: string;
 }
 
 export function CompraFinalizada() {
-  const [pedido, setPedido] = useState<ListaPedido[]>([]);
-
-  const [listaProduto, setListaProduto] = useState<ListaProduto[]>([]);
+  const [pedidos, setPedidos] = useState<ListaPedidos[]>([]);
+  const [produtos, setProdutos] = useState<ListaProduto[]>([]);
+  const [listaProdutos, setListaProdutos] = useState<ListaProduto[]>([]);
+  const [usuarios, setUsuarios] = useState<ListaUsuario[]>([]);
   const [listaUsuarios, setListaUsuarios] = useState<ListaUsuario[]>([]);
-  const [listaCarrinho, setListaCarrinho] = useState<ListaCarrinho[]>([]);
 
   useEffect(() => {
-    // const listaProdutoLocalStorage = JSON.parse(
-    //   localStorage.getItem('listaProduto') || '[]',
-    // );
-    // setListaProduto(listaProdutoLocalStorage);
-
-    // const listaUsuarioLocalStorage = JSON.parse(
-    //   localStorage.getItem('CadastroUsuario') || '[]',
-    // );
-    // setListaUsuarios(listaUsuarioLocalStorage);
+    const listaPedidosConcluidosLocalStorage = JSON.parse(
+      localStorage.getItem('PedidosConcluidos') || '[]',
+    );
+    setPedidos(listaPedidosConcluidosLocalStorage);
 
     const listaCarrinhoLocalStorage = JSON.parse(
       localStorage.getItem('listaCarrinho') || '[]',
     );
-    setListaCarrinho(listaCarrinhoLocalStorage);
+    // setListaCarrinho(listaCarrinhoLocalStorage);
 
-    console.log(...listaCarrinhoLocalStorage)
-    const lista = {...listaCarrinhoLocalStorage}
-    console.log(lista)
-
-  
-
-      // const listaProdutoLocalStorage = JSON.parse(
-      //   localStorage.getItem('listaProduto') || '[]',
-      // );
-      // setListaProduto(listaProdutoLocalStorage);
-  
-      // const listaUsuarioLocalStorage = JSON.parse(
-      //   localStorage.getItem('CadastroUsuario') || '[]',
-      // );
-      // setListaUsuarios(listaUsuarioLocalStorage);
-  
-      // const lista = {
-      //   usuario: {...listaUsuarioLocalStorage}, 
-      //   produto: {...listaProdutoLocalStorage},
-      //   pedido: {...listaCarrinhoLocalStorage},
-      
-      // }
-      // // console.log(lista)
-      // const listaAtualizada = [...pedido, lista];
-      // // const lista = [listaProdutoLocalStorage, listaUsuarioLocalStorage, listaCarrinhoLocalStorage]
-      // // console.log(listaAtualizada)
-      // localStorage.setItem('PedidosFinalizados', JSON.stringify(listaAtualizada));
-      // // setPedido(listaAtualizada)
-  
-      // const listaLocalStorage = JSON.parse(
-      //   localStorage.getItem('PedidosFinalizados') || '[]',
-      // );
-      // setPedido(listaLocalStorage);
-      // console.log(listaLocalStorage);
-      // console.log(pedido);
-      
-  }, [])
-
-  function mostrarPedido() {
     const listaProdutoLocalStorage = JSON.parse(
       localStorage.getItem('listaProduto') || '[]',
     );
-    setListaProduto(listaProdutoLocalStorage);
+    // setListaProduto(listaProdutoLocalStorage);
+    
+    localStorage.setItem('Pedidos', JSON.stringify(listaProdutoLocalStorage));
+    setProdutos(listaProdutoLocalStorage);
 
     const listaUsuarioLocalStorage = JSON.parse(
       localStorage.getItem('CadastroUsuario') || '[]',
     );
-    setListaUsuarios(listaUsuarioLocalStorage);
-
-    const lista = {
-      usuario: {...listaUsuarioLocalStorage}, 
-      produto: {...listaProdutoLocalStorage},
-      pedido: {...listaCarrinho},
+    setUsuarios(listaUsuarioLocalStorage);
     
-    }
-    // console.log(lista)
-    const listaAtualizada = [...pedido, lista];
-    // const lista = [listaProdutoLocalStorage, listaUsuarioLocalStorage, listaCarrinhoLocalStorage]
-    // console.log(listaAtualizada)
-    localStorage.setItem('PedidosFinalizados', JSON.stringify(listaAtualizada));
-    // setPedido(listaAtualizada)
+    
+    const carrinho = listaCarrinhoLocalStorage[0];
+    const usuario = listaUsuarioLocalStorage[0];
+    const produtos = listaProdutoLocalStorage;
 
-    const listaLocalStorage = JSON.parse(
-      localStorage.getItem('PedidosFinalizados') || '[]',
-    );
-    setPedido(listaLocalStorage);
-    console.log(listaLocalStorage);
+    console.log('Errooouuu', carrinho)
 
+    const lista = {...carrinho, ...usuario, produtos}
+    // const lista = {...carrinho, ...usuario}
 
-    // console.log('Pedido',pedido)
+    const listaAtualizada = [...listaPedidosConcluidosLocalStorage, lista];
+    localStorage.setItem('PedidosConcluidos', JSON.stringify(listaAtualizada));
+    setPedidos(listaAtualizada);
 
-    // const lista = {}
-    // const listaAtualizada = [...listaUsuarios];
-    // setListaUsuarios(listaAtualizada);
+    console.log('Teeeeee', lista)
+    // if (listaPedidosConcluidosLocalStorage.length >= 1){
+    //   const listaAtualizada = [...listaPedidosConcluidosLocalStorage, lista];
+    //   localStorage.setItem('PedidosConcluidos', JSON.stringify(listaAtualizada));
+    //   setPedidos(listaAtualizada);
+    // } else {
+    //   const listaAtualizada = [lista];
+    //   localStorage.setItem('PedidosConcluidos', JSON.stringify(listaAtualizada));
+    //   setPedidos(listaAtualizada);
+    // }
+    
 
-    // console.log(listaAtualizada)
+    // localStorage.removeItem('listaCarrinho');
+    localStorage.removeItem('listaProduto');
+    localStorage.removeItem('Pedidos');
+      
+  }, [])
+
+  function mostrarPedido(produto: ListaPedidos, index: number) {
+    setListaProdutos(produtos);
+    setListaUsuarios(usuarios);
   }
 
   return (
     <Container>
       <h2>Pedido Concluído</h2>
-      
+
       <Resumo>
-        {listaCarrinho.map((produto, index) => {
-          return (
+        {pedidos.map((produto, index) => {
+          console.log('Produtos',produto)
+          return ( 
             <div key={index} className="resumo-container">
               <h3>número do pedido</h3>
               <div className="resumo-content">
                 <div>
-                  <p>{produto.id}</p>
+                  <p>{produto.idPedido}</p>
                   <p>Quantidade de Produtos: {produto.totalQtde}</p>
                   <p>Total R$: {parseFloat(produto.totalPreco).toFixed(2)}</p>
                 </div>
                 
-                <button type="button" onClick={mostrarPedido}>Mostrar Pedido</button>
+                <button type="button" onClick={() => mostrarPedido(produto, index)}>Mostrar Pedido</button>
               </div>
             </div>            
           )
@@ -200,17 +158,10 @@ export function CompraFinalizada() {
               </thead>
 
               <tbody>
-                {listaProduto.map((produto, index) => {
+                {listaProdutos.map((produto, index) => {
                   const qtde = parseInt(produto.qtde);
                   const preco = parseFloat(produto.preco.replace(",", "."));
                   const precoTot = (preco * qtde).toFixed(2);
-
-                  // qtdeTotal = qtdeTotal + qtde;
-                  // precoTotal = (precoTotal + (preco * qtde));
-                  
-                  // setQtdeTotal(...qtdeTotal + qtde);
-                  // setQtdeTotal(qtdeTotal + qtde);
-                  // setPrecoTotal(precoTotal + precoTot);
 
                   return (
                     <tr key={index}>
@@ -226,19 +177,6 @@ export function CompraFinalizada() {
           </div>
         </ContentProduto>
       </Content>
-
-      {/* testando */}
-      <div>
-        {pedido.map((lista, index) => {
-          console.log('Lista', lista.usuario);
-          return (
-            <div key={index}>
-              <h3>Foi {lista.produto.descricao}</h3>
-            </div>
-            
-          )
-        })}
-      </div>
       
     </Container>
   )
