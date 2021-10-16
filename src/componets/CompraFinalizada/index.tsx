@@ -10,6 +10,14 @@ interface ListaProduto {
   preco: string;
 }
 
+interface ListaProdutoIndex{
+  id: string;
+  imagemProduto: string;
+  descricao: string;
+  qtde: string;
+  preco: string;
+}
+
 interface ListaUsuario {
   id: string;
   nome: string;
@@ -51,39 +59,42 @@ export function CompraFinalizada() {
     );
     setPedidos(listaPedidosConcluidosLocalStorage);
 
-    const listaCarrinhoLocalStorage = JSON.parse(
-      localStorage.getItem('listaCarrinho') || '[]',
-    );
+    // const listaCarrinhoLocalStorage = JSON.parse(
+    //   localStorage.getItem('listaCarrinho') || '[]',
+    // );
     // setListaCarrinho(listaCarrinhoLocalStorage);
 
-    const listaProdutoLocalStorage = JSON.parse(
-      localStorage.getItem('listaProduto') || '[]',
-    );
-    // setListaProduto(listaProdutoLocalStorage);
+    // const listaProdutoLocalStorage = JSON.parse(
+    //   localStorage.getItem('listaProduto') || '[]',
+    // );
+    // // setListaProduto(listaProdutoLocalStorage);
     
-    localStorage.setItem('Pedidos', JSON.stringify(listaProdutoLocalStorage));
-    setProdutos(listaProdutoLocalStorage);
+    // const listaPedidosLocalStorage = JSON.parse(
+    //   localStorage.getItem('Produtos') || '[]',
+    // );
+    // // const listaAualizada ?
+    // const listaAtualizadaProdutos = [...listaPedidosLocalStorage, listaProdutoLocalStorage]
+    // localStorage.setItem('Produtos', JSON.stringify(listaAtualizadaProdutos));
+    // setProdutos(listaAtualizadaProdutos);
+    // console.log('Traduzindo2', produtos)
 
-    const listaUsuarioLocalStorage = JSON.parse(
-      localStorage.getItem('CadastroUsuario') || '[]',
-    );
-    setUsuarios(listaUsuarioLocalStorage);
+    // const listaUsuarioLocalStorage = JSON.parse(
+    //   localStorage.getItem('CadastroUsuario') || '[]',
+    // );
+    // setUsuarios(listaUsuarioLocalStorage);
     
     
-    const carrinho = listaCarrinhoLocalStorage[0];
-    const usuario = listaUsuarioLocalStorage[0];
-    const produtos = listaProdutoLocalStorage;
+    // const carrinho = listaCarrinhoLocalStorage[0];
+    // const usuario = listaUsuarioLocalStorage[0];
+    // const produto = listaProdutoLocalStorage;
 
-    console.log('Errooouuu', carrinho)
+    // const lista = {...carrinho, ...usuario, produto}
+    // // const lista = {...carrinho, ...usuario}
 
-    const lista = {...carrinho, ...usuario, produtos}
-    // const lista = {...carrinho, ...usuario}
+    // const listaAtualizada = [...listaPedidosConcluidosLocalStorage, lista];
+    // localStorage.setItem('PedidosConcluidos', JSON.stringify(listaAtualizada));
+    // setPedidos(listaAtualizada);
 
-    const listaAtualizada = [...listaPedidosConcluidosLocalStorage, lista];
-    localStorage.setItem('PedidosConcluidos', JSON.stringify(listaAtualizada));
-    setPedidos(listaAtualizada);
-
-    console.log('Teeeeee', lista)
     // if (listaPedidosConcluidosLocalStorage.length >= 1){
     //   const listaAtualizada = [...listaPedidosConcluidosLocalStorage, lista];
     //   localStorage.setItem('PedidosConcluidos', JSON.stringify(listaAtualizada));
@@ -97,13 +108,41 @@ export function CompraFinalizada() {
 
     // localStorage.removeItem('listaCarrinho');
     localStorage.removeItem('listaProduto');
-    localStorage.removeItem('Pedidos');
+    // localStorage.removeItem('Pedidos');
       
   }, [])
 
-  function mostrarPedido(produto: ListaPedidos, index: number) {
-    setListaProdutos(produtos);
-    setListaUsuarios(usuarios);
+  function mostrarPedido(produto: ListaPedidos ,index: number) {
+    // const produtoPorIndex = [produtos[index]]
+    // // const produtoIndex = [...produtoPorIndex]
+    // setListaProdutos(produtoPorIndex);
+    // setListaUsuarios(usuarios);
+
+    // console.log('Por Index', produtoPorIndex);
+    // console.log('Index', produtoIndex);
+    // console.log('Index outro', lista)
+
+    const getUsuario = {
+      id: produto.id,
+      nome: produto.nome,
+      cpf: produto.cpf,
+      cidade: produto.cidade,
+      email: produto.email,
+      senha: produto.senha
+    }
+
+    const user = [getUsuario]
+    setListaUsuarios(user);
+
+    // const listaUsuarioLocalStorage = JSON.parse(
+    //   localStorage.getItem('CadastroUsuario') || '[]',
+    // );
+    // setListaUsuarios(listaUsuarioLocalStorage);
+
+    const listaPedidosLocalStorage = JSON.parse(
+      localStorage.getItem('Produtos') || '[]',
+    );
+    setListaProdutos(listaPedidosLocalStorage[index])
   }
 
   return (
@@ -112,7 +151,7 @@ export function CompraFinalizada() {
 
       <Resumo>
         {pedidos.map((produto, index) => {
-          console.log('Produtos',produto)
+          console.log('Pedidos', produto)
           return ( 
             <div key={index} className="resumo-container">
               <h3>número do pedido</h3>
@@ -146,7 +185,7 @@ export function CompraFinalizada() {
           
         <ContentProduto>
           <div>
-            {/* <h2>Meu carrinho</h2> */}
+            
 
             <table>
               <thead>
@@ -157,12 +196,15 @@ export function CompraFinalizada() {
                 </tr>
               </thead>
 
-              <tbody>
+              <tbody>              
+                
                 {listaProdutos.map((produto, index) => {
+                  // console.log('Descricao', produto.descricao)
+                  // console.log('Produto', produto)
                   const qtde = parseInt(produto.qtde);
                   const preco = parseFloat(produto.preco.replace(",", "."));
                   const precoTot = (preco * qtde).toFixed(2);
-
+                  // console.log(listaProdutos)
                   return (
                     <tr key={index}>
                       <td>{produto.descricao}</td>

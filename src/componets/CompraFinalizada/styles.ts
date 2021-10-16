@@ -72,7 +72,7 @@ export const ContentProduto = styled.div`
         tr {
           th {
             padding: 0.1rem 0;
-            width: 46%;
+            width: 47%;
             // aplica somente no primeiro elemento do th
             /* &:first-child {
               border-radius: 0.25rem 0 0 0;

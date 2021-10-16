@@ -23,9 +23,31 @@ interface ListaUsuario {
   // senha: string
 } 
 
+interface ListaPedidos {
+  id: string;
+  nome: string;
+  cpf: string;
+  cidade: string;
+  email: string;
+  senha: string;
+  produto: {
+    id: string;
+    imagemProduto: string;
+    descricao: string;
+    qtde: string;
+    preco: string;
+  };
+  idPedido: string;
+  totalQtde: string;
+  totalPreco: string;
+}
+
 export function CarrinhoProduto() {
   const [listaAtualizada, setListaAtualizada] = useState<ListaProduto[]>([]);
   const [listaTemporaria, setListaTemporaria] = useState<ListaProduto[]>([]);
+
+  const [pedidos, setPedidos] = useState<ListaPedidos[]>([]);
+  const [produtos, setProdutos] = useState<ListaProduto[]>([]);
 
   const [usuario, setUsuario] = useState<ListaUsuario[]>([]);
   // const [teste, setTeste] = useState('');
@@ -157,9 +179,42 @@ export function CarrinhoProduto() {
       // totalPreco,
     ]
 
-    localStorage.setItem('listaCarrinho', JSON.stringify(todosProdutos));
+    // localStorage.setItem('listaCarrinho', JSON.stringify(todosProdutos));
     // localStorage.setItem('listaCarrinho', JSON.stringify(lista));
     // console.log(todosProdutos)
+
+    const listaPedidosConcluidosLocalStorage = JSON.parse(
+      localStorage.getItem('PedidosConcluidos') || '[]',
+    );
+    setPedidos(listaPedidosConcluidosLocalStorage);
+
+
+    const listaProdutoLocalStorage = JSON.parse(
+      localStorage.getItem('listaProduto') || '[]',
+    );
+    
+    const listaPedidosLocalStorage = JSON.parse(
+      localStorage.getItem('Produtos') || '[]',
+    );
+    // const listaAualizada ?
+    const listaAtualizadaProdutos = [...listaPedidosLocalStorage, listaProdutoLocalStorage]
+    localStorage.setItem('Produtos', JSON.stringify(listaAtualizadaProdutos));
+    // setProdutos(listaAtualizadaProdutos);
+
+    const listaUsuarioLocalStorage = JSON.parse(
+      localStorage.getItem('CadastroUsuario') || '[]',
+    );
+
+    const carrinho = todosProdutos[0];
+    const usuario = listaUsuarioLocalStorage[0];
+    const produto = listaProdutoLocalStorage;
+
+    const listaPedido = {...carrinho, ...usuario, produto}
+    // const lista = {...carrinho, ...usuario}
+
+    const listaAtualizada = [...listaPedidosConcluidosLocalStorage, listaPedido];
+    localStorage.setItem('PedidosConcluidos', JSON.stringify(listaAtualizada));
+    setPedidos(listaAtualizada);
 
     history.push('/compra-finalizada');
   }
