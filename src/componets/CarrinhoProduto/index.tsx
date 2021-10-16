@@ -40,6 +40,7 @@ interface ListaPedidos {
   idPedido: string;
   totalQtde: string;
   totalPreco: string;
+  index: number;
 }
 
 export function CarrinhoProduto() {
@@ -50,6 +51,9 @@ export function CarrinhoProduto() {
   const [produtos, setProdutos] = useState<ListaProduto[]>([]);
 
   const [usuario, setUsuario] = useState<ListaUsuario[]>([]);
+
+  // serve para qdo for pesquisar por nome do usuário 'na pagina Compra Finalizada', e clicar em mostrar pedido, eu saber qual é o index daquele PedidoConcluido
+  // const [getIndex, setGetIndex] = useState(0);
   // const [teste, setTeste] = useState('');
 
   const history = useHistory();
@@ -152,9 +156,15 @@ export function CarrinhoProduto() {
     const listaLocalStorage = JSON.parse(
       localStorage.getItem('CadastroUsuario') || '[]',
     );
-
     // atualiza setListaTemporaria com o que tem no localStorage
     setUsuario(listaLocalStorage);
+
+    const listaPedidosConcluidosLocalStorage = JSON.parse(
+      localStorage.getItem('PedidosConcluidos') || '[]',
+    );
+    setPedidos(listaPedidosConcluidosLocalStorage);
+
+    const getIndex = listaPedidosConcluidosLocalStorage.length;
 
     const totalQtde = qtdeTotal.toString();
     const totalPreco = precoTotal.toString();
@@ -163,6 +173,7 @@ export function CarrinhoProduto() {
       idPedido: uuid(),
       totalQtde,
       totalPreco,
+      index: getIndex,
     }
 
     const todosProdutos = [
@@ -183,10 +194,8 @@ export function CarrinhoProduto() {
     // localStorage.setItem('listaCarrinho', JSON.stringify(lista));
     // console.log(todosProdutos)
 
-    const listaPedidosConcluidosLocalStorage = JSON.parse(
-      localStorage.getItem('PedidosConcluidos') || '[]',
-    );
-    setPedidos(listaPedidosConcluidosLocalStorage);
+    
+    // console.log('Verificar index',listaPedidosConcluidosLocalStorage.length);
 
 
     const listaProdutoLocalStorage = JSON.parse(

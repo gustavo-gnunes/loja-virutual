@@ -44,6 +44,7 @@ interface ListaPedidos {
   idPedido: string;
   totalQtde: string;
   totalPreco: string;
+  index: number;
 }
 
 export function CompraFinalizada() {
@@ -53,57 +54,13 @@ export function CompraFinalizada() {
   const [usuarios, setUsuarios] = useState<ListaUsuario[]>([]);
   const [listaUsuarios, setListaUsuarios] = useState<ListaUsuario[]>([]);
 
+  const [pesquisaUsuario, setPesquisaUsuario] = useState('');
+
   useEffect(() => {
     const listaPedidosConcluidosLocalStorage = JSON.parse(
       localStorage.getItem('PedidosConcluidos') || '[]',
     );
     setPedidos(listaPedidosConcluidosLocalStorage);
-
-    // const listaCarrinhoLocalStorage = JSON.parse(
-    //   localStorage.getItem('listaCarrinho') || '[]',
-    // );
-    // setListaCarrinho(listaCarrinhoLocalStorage);
-
-    // const listaProdutoLocalStorage = JSON.parse(
-    //   localStorage.getItem('listaProduto') || '[]',
-    // );
-    // // setListaProduto(listaProdutoLocalStorage);
-    
-    // const listaPedidosLocalStorage = JSON.parse(
-    //   localStorage.getItem('Produtos') || '[]',
-    // );
-    // // const listaAualizada ?
-    // const listaAtualizadaProdutos = [...listaPedidosLocalStorage, listaProdutoLocalStorage]
-    // localStorage.setItem('Produtos', JSON.stringify(listaAtualizadaProdutos));
-    // setProdutos(listaAtualizadaProdutos);
-    // console.log('Traduzindo2', produtos)
-
-    // const listaUsuarioLocalStorage = JSON.parse(
-    //   localStorage.getItem('CadastroUsuario') || '[]',
-    // );
-    // setUsuarios(listaUsuarioLocalStorage);
-    
-    
-    // const carrinho = listaCarrinhoLocalStorage[0];
-    // const usuario = listaUsuarioLocalStorage[0];
-    // const produto = listaProdutoLocalStorage;
-
-    // const lista = {...carrinho, ...usuario, produto}
-    // // const lista = {...carrinho, ...usuario}
-
-    // const listaAtualizada = [...listaPedidosConcluidosLocalStorage, lista];
-    // localStorage.setItem('PedidosConcluidos', JSON.stringify(listaAtualizada));
-    // setPedidos(listaAtualizada);
-
-    // if (listaPedidosConcluidosLocalStorage.length >= 1){
-    //   const listaAtualizada = [...listaPedidosConcluidosLocalStorage, lista];
-    //   localStorage.setItem('PedidosConcluidos', JSON.stringify(listaAtualizada));
-    //   setPedidos(listaAtualizada);
-    // } else {
-    //   const listaAtualizada = [lista];
-    //   localStorage.setItem('PedidosConcluidos', JSON.stringify(listaAtualizada));
-    //   setPedidos(listaAtualizada);
-    // }
     
 
     // localStorage.removeItem('listaCarrinho');
@@ -113,15 +70,6 @@ export function CompraFinalizada() {
   }, [])
 
   function mostrarPedido(produto: ListaPedidos ,index: number) {
-    // const produtoPorIndex = [produtos[index]]
-    // // const produtoIndex = [...produtoPorIndex]
-    // setListaProdutos(produtoPorIndex);
-    // setListaUsuarios(usuarios);
-
-    // console.log('Por Index', produtoPorIndex);
-    // console.log('Index', produtoIndex);
-    // console.log('Index outro', lista)
-
     const getUsuario = {
       id: produto.id,
       nome: produto.nome,
@@ -134,24 +82,46 @@ export function CompraFinalizada() {
     const user = [getUsuario]
     setListaUsuarios(user);
 
-    // const listaUsuarioLocalStorage = JSON.parse(
-    //   localStorage.getItem('CadastroUsuario') || '[]',
-    // );
-    // setListaUsuarios(listaUsuarioLocalStorage);
-
     const listaPedidosLocalStorage = JSON.parse(
       localStorage.getItem('Produtos') || '[]',
     );
-    setListaProdutos(listaPedidosLocalStorage[index])
+    setListaProdutos(listaPedidosLocalStorage[produto.index])
+
+    console.log(index);
+    console.log(produto.index);
+  }
+
+  function buscarPorUsuario() {
+    const listaPedidosConcluidosLocalStorage = JSON.parse(
+      localStorage.getItem('PedidosConcluidos') || '[]',
+    );
+    const todosPedidos = [...listaPedidosConcluidosLocalStorage];
+
+    if( pesquisaUsuario !== '') {
+      const pesqPorUsaurio = todosPedidos.filter((pedido) => pedido.nome === pesquisaUsuario)
+      setPedidos(pesqPorUsaurio);
+    } else {
+      setPedidos(todosPedidos);
+    }
+
+    setListaProdutos([]);
+    setListaUsuarios([]);
   }
 
   return (
     <Container>
       <h2>Pedido Concluído</h2>
+      <p>Pesquisar: </p>
+      <input 
+        type="text" 
+        placeholder="Nome do usuário" 
+        onChange={event => setPesquisaUsuario(event.target.value)}
+        value={pesquisaUsuario}
+      />
+      <button type="button" onClick={buscarPorUsuario}>Buscar</button>
 
       <Resumo>
         {pedidos.map((produto, index) => {
-          console.log('Pedidos', produto)
           return ( 
             <div key={index} className="resumo-container">
               <h3>número do pedido</h3>
