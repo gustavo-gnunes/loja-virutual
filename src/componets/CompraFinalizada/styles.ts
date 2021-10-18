@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   padding: 2rem;
@@ -6,6 +6,44 @@ export const Container = styled.div`
   h2 {
     margin-bottom: 1rem;
     text-align: center;
+  }
+
+  h3 {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .pesquisar {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .pesquisar-nome,
+  .pesquisar-cpf,
+  .pesquisar-cidade {
+    input {
+      margin-right: 0.5rem;
+      border: none;
+      padding: 0.2rem;
+    }
+
+    button {
+      border: none;
+    border-radius: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    opacity: 0.9;
+    font-size: 0.9rem;
+
+    &:hover {
+      opacity: 1;
+    }
+    }
   }
 `;
 
@@ -32,7 +70,6 @@ export const Resumo = styled.div`
       opacity: 1;
     }
   }
-
 `;
 
 export const Content = styled.div`
@@ -56,7 +93,7 @@ export const ContentProduto = styled.div`
     h2 {
       text-align: center;
     }
-    
+
     table {
       width: 100%;
       margin-top: 0.5rem;
@@ -73,14 +110,6 @@ export const ContentProduto = styled.div`
           th {
             padding: 0.1rem 0;
             width: 47%;
-            // aplica somente no primeiro elemento do th
-            /* &:first-child {
-              border-radius: 0.25rem 0 0 0;
-            }
-            // aplica somente no segundo último elemento do th
-            &:nth-last-child(2) {
-              width: 3rem;
-            } */
             // aplica somente no último elemento do th
             &:last-child {
               width: 3rem;
@@ -105,8 +134,6 @@ export const ContentProduto = styled.div`
               width: 3rem;
               border-radius: 0 0.25rem 0 0;
             }
-
-            
           }
         }
         /* } */
@@ -114,4 +141,3 @@ export const ContentProduto = styled.div`
     }
   }
 `;
-
