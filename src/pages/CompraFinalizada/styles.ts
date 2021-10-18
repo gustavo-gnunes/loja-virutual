@@ -32,18 +32,6 @@ export const Container = styled.div`
       border: none;
       padding: 0.2rem;
     }
-
-    button {
-      border: none;
-    border-radius: 0.5rem;
-    padding: 0.3rem 0.8rem;
-    opacity: 0.9;
-    font-size: 0.9rem;
-
-    &:hover {
-      opacity: 1;
-    }
-    }
   }
 `;
 
@@ -57,18 +45,6 @@ export const Resumo = styled.div`
   .resumo-content {
     display: flex;
     justify-content: space-between;
-  }
-
-  button {
-    border: none;
-    border-radius: 0.5rem;
-    padding: 0.3rem 0.8rem;
-    opacity: 0.9;
-    font-size: 0.9rem;
-
-    &:hover {
-      opacity: 1;
-    }
   }
 `;
 

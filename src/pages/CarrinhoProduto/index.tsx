@@ -4,6 +4,8 @@ import { FiTrash2 } from 'react-icons/fi';
 import nookies from 'nookies';
 import {v4 as uuid} from 'uuid';
 
+import { Button } from "../../componets/Button";
+
 import { Container, Content, Resumo } from './styles';
 
 interface ListaProduto {
@@ -261,8 +263,13 @@ export function CarrinhoProduto() {
           <p>R$: {precoTotal.toFixed(2)}</p>
         </div>
 
-        <button type="button" onClick={finalizaCompra}>Finaizar Compra</button>
-
+        <Button 
+          type="button" 
+          onClick={finalizaCompra}
+        >
+          Finalizar Compra
+        </Button>
+        
         <Link to="/">Adicionar + produtos</Link>
         
       </Resumo>

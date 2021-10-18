@@ -2,6 +2,8 @@ import React, { useState, useEffect, FormEvent } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import nookies from 'nookies';
 
+import { Button } from "../../componets/Button";
+
 import { Container } from './styles';
 
 interface ListaUsuario {
@@ -86,7 +88,10 @@ export function SignIn() {
           value={senha}
         />
 
-        <button type="submit">Continuar</button>
+        <Button type="submit">
+          Continuar
+        </Button>
+ 
         <Link to="/cadastro-usuario">Cadastre-se</Link>
       </form>
 

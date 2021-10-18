@@ -8,6 +8,8 @@ import {
   ContentProduto,
 } from "./styles";
 
+import { Button } from '../../componets/Button';
+
 interface ListaProduto {
   id: string;
   imagemProduto: string;
@@ -157,9 +159,9 @@ export function CompraFinalizada() {
             onChange={(event) => setPesquisaUsuario(event.target.value)}
             value={pesquisaUsuario}
           />
-          <button type='button' onClick={buscarPorUsuario}>
+          <Button type="button" onClick={buscarPorUsuario}>
             Buscar
-          </button>
+          </Button>
         </div>
 
         <div className="pesquisar-cpf">
@@ -169,9 +171,9 @@ export function CompraFinalizada() {
             onChange={(event) => setPesquisaCPF(event.target.value)}
             value={pesquisaCPF}
           />
-          <button type='button' onClick={buscarPorCPF}>
+          <Button type="button" onClick={buscarPorCPF}>
             Buscar
-          </button>
+          </Button>
         </div>
 
         <div className="pesquisar-cidade">
@@ -181,9 +183,9 @@ export function CompraFinalizada() {
             onChange={(event) => setPesquisaCidade(event.target.value)}
             value={pesquisaCidade}
           />
-          <button type='button' onClick={buscarPorCidade}>
+          <Button type="button" onClick={buscarPorCidade}>
             Buscar
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -199,12 +201,18 @@ export function CompraFinalizada() {
                   <p>Total R$: {parseFloat(produto.totalPreco).toFixed(2)}</p>
                 </div>
 
-                <button
+                <Button
+                  type='button'
+                  onClick={() => mostrarPedido(produto, index)}
+                >
+                  MostarPedido
+                </Button>
+                {/* <button
                   type='button'
                   onClick={() => mostrarPedido(produto, index)}
                 >
                   Mostrar Pedido
-                </button>
+                </button> */}
               </div>
             </div>
           );

@@ -2,6 +2,8 @@ import React, { useState, FormEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 
+import { Button } from "../../componets/Button";
+
 import { Container, Content } from './styles';
 
 interface ListaUsuario {
@@ -92,7 +94,9 @@ export function CadstroUsuario() {
             value={senha}
           />
 
-          <button type="submit">Cadastrar</button>
+          <Button type="submit">
+            Cadastrar
+          </Button>
         </form>
         
       </Content>

@@ -67,16 +67,6 @@ export const Content = styled.div`
 
       button {
         margin-top: 1rem;
-
-        border: none;
-        border-radius: 1rem;
-        padding: 0.3rem 0.8rem;
-        opacity: 0.9;
-        font-size: 0.9rem;
-
-        &:hover {
-          opacity: 1;
-        }
       }
     }
   }

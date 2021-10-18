@@ -1,10 +1,10 @@
 import { Switch, Route } from 'react-router-dom';
 
-import { Produto } from '../componets/Produto';
-import { CarrinhoProduto } from '../componets/CarrinhoProduto';
-import { SignIn } from '../componets/SignIn';
-import { CadstroUsuario } from '../componets/CadastroUsuario';
-import { CompraFinalizada } from '../componets/CompraFinalizada';
+import { Produto } from '../pages/Produto';
+import { CarrinhoProduto } from '../pages/CarrinhoProduto';
+import { SignIn } from '../pages/SignIn';
+import { CadstroUsuario } from '../pages/CadastroUsuario';
+import { CompraFinalizada } from '../pages/CompraFinalizada';
 
 export function Routes() {
   return (

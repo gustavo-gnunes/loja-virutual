@@ -28,15 +28,5 @@ export const Content = styled.div`
   button {
     width: 100%;
     margin-top: 1rem;
-
-    border: none;
-    border-radius: 0.5rem;
-    padding: 0.3rem 0.8rem;
-    opacity: 0.9;
-    font-size: 0.9rem;
-
-    &:hover {
-      opacity: 1;
-    }
   }
 `;
