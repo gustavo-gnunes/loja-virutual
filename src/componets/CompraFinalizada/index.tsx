@@ -16,14 +16,6 @@ interface ListaProduto {
   preco: string;
 }
 
-interface ListaProdutoIndex {
-  id: string;
-  imagemProduto: string;
-  descricao: string;
-  qtde: string;
-  preco: string;
-}
-
 interface ListaUsuario {
   id: string;
   nome: string;
@@ -55,9 +47,7 @@ interface ListaPedidos {
 
 export function CompraFinalizada() {
   const [pedidos, setPedidos] = useState<ListaPedidos[]>([]);
-  const [produtos, setProdutos] = useState<ListaProduto[]>([]);
   const [listaProdutos, setListaProdutos] = useState<ListaProduto[]>([]);
-  const [usuarios, setUsuarios] = useState<ListaUsuario[]>([]);
   const [listaUsuarios, setListaUsuarios] = useState<ListaUsuario[]>([]);
 
   const [pesquisaUsuario, setPesquisaUsuario] = useState("");
@@ -70,9 +60,7 @@ export function CompraFinalizada() {
     );
     setPedidos(listaPedidosConcluidosLocalStorage);
 
-    // localStorage.removeItem('listaCarrinho');
     localStorage.removeItem("listaProduto");
-    // localStorage.removeItem('Pedidos');
   }, []);
 
   function mostrarPedido(produto: ListaPedidos, index: number) {
@@ -250,12 +238,10 @@ export function CompraFinalizada() {
 
               <tbody>
                 {listaProdutos.map((produto, index) => {
-                  // console.log('Descricao', produto.descricao)
-                  // console.log('Produto', produto)
                   const qtde = parseInt(produto.qtde);
                   const preco = parseFloat(produto.preco.replace(",", "."));
                   const precoTot = (preco * qtde).toFixed(2);
-                  // console.log(listaProdutos)
+
                   return (
                     <tr key={index}>
                       <td>{produto.descricao}</td>

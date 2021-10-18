@@ -8,7 +8,6 @@ import Produtos from '../../model/Produtos';
 
 const dataProdutos = Produtos.get();
 
-// import imageNote from '../../assets/imagesNotebook/note01.png';
 interface ListaProduto {
   id: string;
   imagemProduto: string;
@@ -26,7 +25,6 @@ export function Produto() {
 
   // carrega lista que está no localStorage, qdo atualiza a página
   useEffect(() => {
-    // carregarLista();
     const listaLocalStorage = JSON.parse(
       localStorage.getItem('listaProduto') || '[]',
     );
@@ -60,8 +58,7 @@ export function Produto() {
           setListaAtualizada(lista);
 
           history.push('/carrinho');
-        //   const qtdeAtualizada = parseInt(achouProduto?.qtde) + parseInt(quantidade);
-        //   console.log()
+
         } else {
           const listaProduto = {
             id: produto.id,
@@ -79,25 +76,8 @@ export function Produto() {
 
           history.push('/carrinho');
         }
-
-
-        // const listaProduto = {
-        //   id: produto.id,
-        //   imagemProduto: produto.imagemProduto,
-        //   descricao: produto.descricao,
-        //   qtde: quantidade,
-        //   preco: produto.preco,
-        // };
-    
-        // const lista = [...listaAtualizada, listaProduto];
-    
-        // // atualiza a lista no localStorage
-        // localStorage.setItem('listaProduto', JSON.stringify(lista));
-        // setListaAtualizada(lista);
-
-        // history.push('/carrinho');
       } else {
-        // para salavar o que o usuário quer colocar no carrinho, qdo não estiver logado
+        // para salvar o que o usuário quer colocar no carrinho, qdo não estiver logado
         const listaProduto = {
           id: produto.id,
           imagemProduto: produto.imagemProduto,
@@ -114,8 +94,6 @@ export function Produto() {
         history.push('/simple-login');
       }    
 
-      // history.push('/carrinho');
-      // history.push('/simple-login');
     } else {
       alert('Entre com a quantidade!');
     }
@@ -156,5 +134,3 @@ export function Produto() {
     </Container>
   )
 }
-
-// qdo add um mesmo produto, está criando outra linha de produto e não só alterando a qtde

@@ -68,8 +68,6 @@ export const Content = styled.div`
             // aplica somente no segundo último elemento do th
             &:nth-last-child(2) {
               width: 3rem;
-              /* padding: 0.2rem; */
-              /* background: red; */
             }
             // aplica somente no último elemento do th
             &:last-child {
@@ -79,7 +77,6 @@ export const Content = styled.div`
             }
           }
         }
-        /* } */
       }
     }
   }

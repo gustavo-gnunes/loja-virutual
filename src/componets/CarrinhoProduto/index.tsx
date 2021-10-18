@@ -52,10 +52,6 @@ export function CarrinhoProduto() {
 
   const [usuario, setUsuario] = useState<ListaUsuario[]>([]);
 
-  // serve para qdo for pesquisar por nome do usuário 'na pagina Compra Finalizada', e clicar em mostrar pedido, eu saber qual é o index daquele PedidoConcluido
-  // const [getIndex, setGetIndex] = useState(0);
-  // const [teste, setTeste] = useState('');
-
   const history = useHistory();
 
   var qtdeTotal = 0;
@@ -90,7 +86,6 @@ export function CarrinhoProduto() {
     );
 
     const lista = [...listaLocalStorage, ...listaTemporariaLocalStorage];
-    // console.log(lista)
 
     localStorage.setItem('listaProduto', JSON.stringify(lista));
     // atualiza listaAtualizada com o que tem no localStorage
@@ -124,8 +119,6 @@ export function CarrinhoProduto() {
 
       qtdeTotal = qtdeTotal - 1;
       precoTotal = precoTotal - parseFloat(produto.preco);
-      // setTeste(qtdeTotal.toString());
-      // console.log(qtdeTotal)
 
       carregarLista();
     }
@@ -145,8 +138,6 @@ export function CarrinhoProduto() {
 
       qtdeTotal = qtdeTotal + 1;
       precoTotal = precoTotal + parseFloat(produto.preco);
-      // setTeste(qtdeTotal.toString());
-      // console.log(qtdeTotal)
 
       carregarLista();
     }
@@ -178,25 +169,7 @@ export function CarrinhoProduto() {
 
     const todosProdutos = [
       lista,
-      // produtos: {
-      //   ...listaAtualizada,
-      // },
-      // listaLocalStorage,
-      // total: {
-      //   qtdeTotal,
-      //   precoTotal,
-      // }
-      // totalQtde,
-      // totalPreco,
     ]
-
-    // localStorage.setItem('listaCarrinho', JSON.stringify(todosProdutos));
-    // localStorage.setItem('listaCarrinho', JSON.stringify(lista));
-    // console.log(todosProdutos)
-
-    
-    // console.log('Verificar index',listaPedidosConcluidosLocalStorage.length);
-
 
     const listaProdutoLocalStorage = JSON.parse(
       localStorage.getItem('listaProduto') || '[]',
@@ -205,10 +178,9 @@ export function CarrinhoProduto() {
     const listaPedidosLocalStorage = JSON.parse(
       localStorage.getItem('Produtos') || '[]',
     );
-    // const listaAualizada ?
+    
     const listaAtualizadaProdutos = [...listaPedidosLocalStorage, listaProdutoLocalStorage]
     localStorage.setItem('Produtos', JSON.stringify(listaAtualizadaProdutos));
-    // setProdutos(listaAtualizadaProdutos);
 
     const listaUsuarioLocalStorage = JSON.parse(
       localStorage.getItem('CadastroUsuario') || '[]',
@@ -219,7 +191,6 @@ export function CarrinhoProduto() {
     const produto = listaProdutoLocalStorage;
 
     const listaPedido = {...carrinho, ...usuario, produto}
-    // const lista = {...carrinho, ...usuario}
 
     const listaAtualizada = [...listaPedidosConcluidosLocalStorage, listaPedido];
     localStorage.setItem('PedidosConcluidos', JSON.stringify(listaAtualizada));
@@ -254,10 +225,6 @@ export function CarrinhoProduto() {
 
                 qtdeTotal = qtdeTotal + qtde;
                 precoTotal = (precoTotal + (preco * qtde));
-                
-                // setQtdeTotal(...qtdeTotal + qtde);
-                // setQtdeTotal(qtdeTotal + qtde);
-                // setPrecoTotal(precoTotal + precoTot);
 
                 return (
                   <tr key={index}>
@@ -305,5 +272,3 @@ export function CarrinhoProduto() {
     </Container>
   )
 }
-
-// não está atualizando de forma automática o resumo do pedido (a qtde e o valor total)

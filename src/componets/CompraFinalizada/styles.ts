@@ -124,7 +124,6 @@ export const ContentProduto = styled.div`
         overflow-y: scroll;
         height: 22rem;
         tr {
-          /* width: 100%; */
           td {
             border-top: 1.5px solid darkgray;
             padding: 0.2rem 0;
@@ -136,7 +135,6 @@ export const ContentProduto = styled.div`
             }
           }
         }
-        /* } */
       }
     }
   }
