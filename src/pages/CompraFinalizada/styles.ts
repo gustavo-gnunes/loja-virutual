@@ -23,16 +23,6 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
   }
-
-  .pesquisar-nome,
-  .pesquisar-cpf,
-  .pesquisar-cidade {
-    input {
-      /* margin-right: 0.5rem; */
-      /* border: none;
-      padding: 0.2rem; */
-    }
-  }
 `;
 
 export const Resumo = styled.div`

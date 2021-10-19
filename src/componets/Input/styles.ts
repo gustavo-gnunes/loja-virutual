@@ -7,6 +7,7 @@ export const Container = styled.input`
   flex: 1; // o input ocupa todo espaço possível
   margin-right: 0.5rem;
   border: 0;
+  border-radius: 0.5rem;
   color: var(--grey11);
   padding: 0.2rem;
   

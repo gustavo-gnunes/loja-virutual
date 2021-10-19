@@ -15,8 +15,6 @@ export const Container = styled.div`
   input {
     display: block;
     width: 100%;
-
-    border-radius: 0.5rem;
   }
 
   input + input {
