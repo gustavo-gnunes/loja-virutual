@@ -8,7 +8,8 @@ import {
   ContentProduto,
 } from "./styles";
 
-import { Button } from '../../componets/Button';
+import { Button } from "../../componets/Button";
+import { Input } from "../../componets/Input";
 
 interface ListaProduto {
   id: string;
@@ -104,7 +105,7 @@ export function CompraFinalizada() {
 
     setListaProdutos([]);
     setListaUsuarios([]);
-    setPesquisaUsuario('');
+    setPesquisaUsuario("");
   }
 
   function buscarPorCPF() {
@@ -124,7 +125,7 @@ export function CompraFinalizada() {
 
     setListaProdutos([]);
     setListaUsuarios([]);
-    setPesquisaCPF('');
+    setPesquisaCPF("");
   }
 
   function buscarPorCidade() {
@@ -144,46 +145,49 @@ export function CompraFinalizada() {
 
     setListaProdutos([]);
     setListaUsuarios([]);
-    setPesquisaCidade('');
+    setPesquisaCidade("");
   }
 
   return (
     <Container>
       <h2>Pedido Concluído</h2>
       <h3>Pesquisar: </h3>
-      <div className="pesquisar">
-        <div className="pesquisar-nome">
-          <input
+      <div className='pesquisar'>
+        <div className='pesquisar-nome'>
+          <Input
             type='text'
             placeholder='Nome do usuário'
             onChange={(event) => setPesquisaUsuario(event.target.value)}
             value={pesquisaUsuario}
           />
-          <Button type="button" onClick={buscarPorUsuario}>
+
+          <Button type='button' onClick={buscarPorUsuario}>
             Buscar
           </Button>
         </div>
 
-        <div className="pesquisar-cpf">
-          <input
+        <div className='pesquisar-cpf'>
+          <Input
             type='text'
             placeholder='CPF do usuário'
             onChange={(event) => setPesquisaCPF(event.target.value)}
             value={pesquisaCPF}
           />
-          <Button type="button" onClick={buscarPorCPF}>
+
+          <Button type='button' onClick={buscarPorCPF}>
             Buscar
           </Button>
         </div>
 
-        <div className="pesquisar-cidade">
-          <input
+        <div className='pesquisar-cidade'>
+        <Input
             type='text'
             placeholder='Cidade do usuário'
             onChange={(event) => setPesquisaCidade(event.target.value)}
             value={pesquisaCidade}
           />
-          <Button type="button" onClick={buscarPorCidade}>
+
+          <Button type='button' onClick={buscarPorCidade}>
             Buscar
           </Button>
         </div>

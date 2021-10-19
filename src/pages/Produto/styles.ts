@@ -62,7 +62,6 @@ export const Content = styled.div`
       input {
         width: 2.5rem;
         text-align: center;
-        margin-right: 0.5rem;
       }
 
       button {

@@ -28,9 +28,9 @@ export const Container = styled.div`
   .pesquisar-cpf,
   .pesquisar-cidade {
     input {
-      margin-right: 0.5rem;
-      border: none;
-      padding: 0.2rem;
+      /* margin-right: 0.5rem; */
+      /* border: none;
+      padding: 0.2rem; */
     }
   }
 `;

@@ -1,10 +1,11 @@
-import React, { useState, FormEvent } from 'react';
-import { useHistory } from 'react-router-dom';
-import { v4 as uuid } from 'uuid';
+import React, { useState, FormEvent } from "react";
+import { useHistory } from "react-router-dom";
+import { v4 as uuid } from "uuid";
 
 import { Button } from "../../componets/Button";
+import { Input } from "../../componets/Input";
 
-import { Container, Content } from './styles';
+import { Container, Content } from "./styles";
 
 interface ListaUsuario {
   id: string;
@@ -12,15 +13,15 @@ interface ListaUsuario {
   cpf: string;
   cidade: string;
   email: string;
-  senha: string
-} 
+  senha: string;
+}
 
 export function CadstroUsuario() {
-  const [nome, setNome] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [cidade, setCidade] = useState('');
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [nome, setNome] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
 
   const [todosUsuarios, setTodosUsuarios] = useState<ListaUsuario[]>([]);
 
@@ -30,13 +31,13 @@ export function CadstroUsuario() {
     event.preventDefault();
 
     if (
-      nome.trim() === '' ||
-      cpf.trim() === '' ||
-      cidade.trim() === '' ||
-      email.trim() === '' ||
-      senha.trim() === ''
+      nome.trim() === "" ||
+      cpf.trim() === "" ||
+      cidade.trim() === "" ||
+      email.trim() === "" ||
+      senha.trim() === ""
     ) {
-      alert('Digite todos os campos obrigatórios!');
+      alert("Digite todos os campos obrigatórios!");
       return;
     }
 
@@ -47,14 +48,14 @@ export function CadstroUsuario() {
       cidade: cidade,
       email: email,
       senha: senha,
-    }
+    };
 
     const usuarios = [...todosUsuarios, listaCadstroUsuario];
 
-    localStorage.setItem('CadastroUsuario', JSON.stringify(usuarios));
+    localStorage.setItem("CadastroUsuario", JSON.stringify(usuarios));
     setTodosUsuarios(usuarios);
 
-    history.push('/simple-login');
+    history.push("/simple-login");
   }
 
   return (
@@ -63,43 +64,44 @@ export function CadstroUsuario() {
 
       <Content>
         <form onSubmit={handleSubmit}>
-          <input 
-            type="text" 
-            placeholder="Nome Completo*" 
-            onChange={event => setNome(event.target.value)}
+          <Input
+            type='text'
+            placeholder='Nome Completo*'
+            onChange={(event) => setNome(event.target.value)}
             value={nome}
           />
-          <input 
-            type="text" 
-            placeholder="CPF*" 
-            onChange={event => setCpf(event.target.value)}
+
+          <Input
+            type='text'
+            placeholder='CPF*'
+            onChange={(event) => setCpf(event.target.value)}
             value={cpf}
           />
-          <input 
-            type="text" 
-            placeholder="Cidade*"
-            onChange={event => setCidade(event.target.value)}
+
+          <Input
+            type='text'
+            placeholder='Cidade*'
+            onChange={(event) => setCidade(event.target.value)}
             value={cidade}
           />
-          <input 
-            type="email" 
-            placeholder="E-mail *"
-            onChange={event => setEmail(event.target.value)}
+
+          <Input
+            type='email'
+            placeholder='E-mail *'
+            onChange={(event) => setEmail(event.target.value)}
             value={email}
           />
-          <input 
-            type="password" 
-            placeholder="Senha*"
-            onChange={event => setSenha(event.target.value)}
+
+          <Input
+            type='password'
+            placeholder='Senha*'
+            onChange={(event) => setSenha(event.target.value)}
             value={senha}
           />
 
-          <Button type="submit">
-            Cadastrar
-          </Button>
+          <Button type='submit'>Cadastrar</Button>
         </form>
-        
       </Content>
     </Container>
-  )
+  );
 }

@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import nookies from "nookies";
 
 import { Button } from "../../componets/Button";
+import { Input } from "../../componets/Input";
 
 import { Container, Content } from "./styles";
 
@@ -117,12 +118,13 @@ export function Produto() {
                 <p>{produto.descricao}</p>
                 <p>R$ {produto.preco}</p>
                 <span>Quantidade: </span>
-                <input
+                <Input
                   type='number'
                   min='1'
                   max='10'
                   onChange={(event) => setQuantidade(event.target.value)}
                 />
+
                 <Button 
                   type='button' 
                   onClick={() => addProduto(produto)}
